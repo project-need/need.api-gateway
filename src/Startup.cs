@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Need.ApiGateway.Config;
+using Need.ApiGateway.Database;
+using Need.ApiGateway.Models;
 
 namespace Need.ApiGateway
 {
@@ -26,6 +22,11 @@ namespace Need.ApiGateway
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddScoped<IRepository<Toilet>, ToiletRepository>();
+            services.AddScoped<IToiletContext, ToiletContext>();
+
+            services.Configure<DatabaseConfig>(Configuration.GetSection("Database"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
