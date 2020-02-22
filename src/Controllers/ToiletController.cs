@@ -38,7 +38,7 @@ namespace Need.ApiGateway.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult> Post(Toilet toilet)
+        public async Task<ActionResult<Toilet>> Post(Toilet toilet)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -51,7 +51,7 @@ namespace Need.ApiGateway.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
-        public async Task<ActionResult> Put(string id, Toilet toilet)
+        public async Task<ActionResult<Toilet>> Put(string id, Toilet toilet)
         {
             if (string.IsNullOrEmpty(id))
                 return BadRequest();
